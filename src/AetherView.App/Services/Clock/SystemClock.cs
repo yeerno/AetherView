@@ -1,0 +1,6 @@
+namespace AetherView.App.Services.Clock;
+
+public sealed class SystemClock : IClock
+{
+    public DateTimeOffset UtcNow => DateTimeOffset.UtcNow;
+}

@@ -223,6 +223,17 @@ Avoid directly assigning arbitrary status values from ViewModels.
 
 ## 6. Delivery stages
 
+### Current implementation status
+
+Last updated: 2026-07-26.
+
+| Stage | Status | Summary |
+| --- | --- | --- |
+| Stage 0 — Repository bootstrap | In progress | The solution, MAUI project, xUnit project, SDK pinning, documentation, restore, build, and test flow exist. Central package management is still missing, application startup has not been manually verified, and Android clean builds report two SQLite native-library warnings. |
+| Stage 1 — Application shell and navigation | Not started | Only the default MAUI template shell exists. Feature navigation, ViewModels, and application themes have not been implemented. |
+| Stage 2 — Domain model and protocol rules | In progress | The initial domain foundation, secure blind assignment, the main happy-path transitions, clock abstraction, feedback reveal rule, and 19 domain tests are implemented. The remaining Stage 2 work is listed below. |
+| Stages 3–10 | Not started | Persistence, project UI, image library, trials, judging, notifications, statistics, audio, and polish remain outside the current implementation. |
+
 ## Stage 0 — Repository bootstrap
 
 Deliverables:
@@ -279,6 +290,37 @@ Deliverables:
 - prediction decision model;
 - feedback reveal rules;
 - audit event model.
+
+Implemented foundation:
+
+- the required `ArvProjectStatus`, `ImageTemperature`, `PredictionDecision`, `ActualOutcome`, and `TrialStatus` enums;
+- minimal `ArvProject`, `ImageAsset`, `BlindAssignment`, `ArvTrial`, `TrialJudgement`, `PredictionResult`, and `FeedbackResult` entities;
+- constructor validation for required identifiers, values, outcome names, timestamps, and opaque image storage keys;
+- `IClock` and `SystemClock`, with domain services depending on the injected clock;
+- secure assignment using `RandomNumberGenerator`;
+- validation that an assignment contains one warm and one cold image with distinct identifiers;
+- order-independent image-category handling;
+- immutable assignment data and protection against replacing a project assignment after protocol lock;
+- internal visibility for the protected Outcome-to-image mapping so it is not exposed through the public project model;
+- explicit result types and safe domain error codes for expected failures;
+- the main project path from `Draft` through `AwaitingFeedback`, plus `FeedbackRevealed` and `Completed`;
+- feedback validation for project status, availability time, confirmed binary outcome, one-time reveal, and valid locked assignment;
+- resolution of the image assigned to the confirmed actual outcome;
+- recording of reveal time and hit/miss or `NoPrediction` semantics;
+- dependency injection registration for the clock, assignment, and feedback services;
+- a platform-neutral `net10.0` target used by domain tests without starting the MAUI host.
+
+Remaining Stage 2 work:
+
+- complete and test every allowed and forbidden project status transition;
+- add the exceptional `Cancelled` and `Invalidated` transition rules;
+- decide and implement whether any transition timestamps must be monotonic;
+- add the remaining domain models needed by this stage, including protocol configuration and audit events;
+- complete protocol validation across project, trial, judging, prediction, and feedback state;
+- finalize and implement the scoring formula, tie handling, signal threshold, and `InvalidSession` behavior;
+- prevent silent recalculation with a different scoring algorithm version;
+- add deterministic coverage that guards against a hard-coded assignment branch without claiming statistical proof of randomness;
+- add the remaining time-zone and daylight-saving boundary tests where applicable.
 
 Required tests:
 
@@ -560,17 +602,18 @@ Notification tests should include:
 
 ### Must have
 
-- [ ] Create solution.
-- [ ] Add MAUI project.
-- [ ] Add xUnit test project.
+- [x] Create solution.
+- [x] Add MAUI project.
+- [x] Add xUnit test project.
 - [ ] Configure central package management.
-- [ ] Configure MVVM Toolkit.
-- [ ] Configure MAUI Community Toolkit.
-- [ ] Configure EF Core SQLite.
-- [ ] Add domain model.
-- [ ] Add protocol state machine.
-- [ ] Add warm/cold image selection.
-- [ ] Add secure blind assignment.
+- [x] Configure MVVM Toolkit.
+- [x] Configure MAUI Community Toolkit.
+- [ ] Configure EF Core SQLite beyond the current package references.
+- [x] Add the initial domain model foundation.
+- [ ] Complete the remaining domain model and protocol state machine.
+- [ ] Add warm/cold image library selection; assignment of an already selected valid pair is complete.
+- [x] Add secure blind assignment.
+- [x] Add the clock abstraction and feedback reveal domain rule.
 - [ ] Add project CRUD.
 - [ ] Add trial notes.
 - [ ] Add drawing canvas.
@@ -578,9 +621,9 @@ Notification tests should include:
 - [ ] Add prediction calculation.
 - [ ] Add local notification.
 - [ ] Add manual winner entry.
-- [ ] Add winner-image reveal.
+- [ ] Add winner-image reveal UI and persistence; winner-image resolution in the domain is complete.
 - [ ] Add basic statistics.
-- [ ] Add tests for critical rules.
+- [ ] Complete tests for all critical rules; 19 assignment, transition, timing, and reveal tests currently pass.
 
 ### Should have
 
