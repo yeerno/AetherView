@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AetherView.App/AetherView.App.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AetherView.Tests/AetherView.Tests.csproj" />
+  </Folder>
+</Solution>
