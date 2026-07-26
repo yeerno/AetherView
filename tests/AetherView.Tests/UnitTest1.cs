@@ -1,4 +1,4 @@
-﻿namespace AetherView.Tests;
+namespace AetherView.Tests;
 
 public class UnitTest1
 {
