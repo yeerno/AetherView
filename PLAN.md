@@ -229,8 +229,8 @@ Last updated: 2026-07-26.
 
 | Stage | Status | Summary |
 | --- | --- | --- |
-| Stage 0 — Repository bootstrap | In progress | The solution, MAUI project, xUnit project, SDK pinning, documentation, restore, build, and test flow exist. Central package management is still missing, application startup has not been manually verified, and Android clean builds report two SQLite native-library warnings. |
-| Stage 1 — Application shell and navigation | In progress | All planned feature pages now have DI-resolved, theme-aware preview layouts with explicit dummy data and are available through Shell navigation. Contextual workflow navigation and real behavior remain to be implemented. |
+| Stage 0 — Repository bootstrap | In progress | The solution, MAUI project, xUnit project, SDK pinning, documentation, restore, build, test, and Windows CLI launch flow exist. Central package management is still missing, the UI has not been manually verified on a user desktop, and Android clean builds report two SQLite native-library warnings. |
+| Stage 1 — Application shell and navigation | In progress | All planned feature pages now have DI-resolved, theme-aware preview layouts with explicit dummy data. A dedicated Start hub provides working navigation to New session, History, and Dashboard. The remaining workflow behavior is not implemented. |
 | Stage 2 — Domain model and protocol rules | In progress | The initial domain foundation, secure blind assignment, the main happy-path transitions, clock abstraction, feedback reveal rule, and 19 domain tests are implemented. The remaining Stage 2 work is listed below. |
 | Stages 3–10 | Not started | Persistence, project UI, image library, trials, judging, notifications, statistics, audio, and polish remain outside the current implementation. |
 
@@ -278,8 +278,11 @@ Implemented foundation:
 - feature-oriented `Features/Home` folder with `HomePage`, `HomeViewModel`, and a presentation model for recent sessions;
 - `HomePage` configured as the application start screen;
 - preview layouts and ViewModels for Projects, Project editor, Session, Judging, Feedback, Statistics, and Settings;
+- dedicated `StartPage` and `StartViewModel` with working commands for New session, History, and Dashboard;
+- dedicated History page and ViewModel for completed-session previews;
 - constructor-based dependency injection for `App`, `AppShell`, all pages, and all ViewModels;
 - Flyout Shell navigation exposing every preview page;
+- navigation isolated behind an interface and implemented by Shell;
 - a recent-project query interface with an explicit preview-data implementation until SQLite persistence is available;
 - sorting by project update time and a hard limit of five items in the ViewModel;
 - loading, pull-to-refresh, empty, and safe error states;
@@ -288,7 +291,8 @@ Implemented foundation:
 - neutral numbered image placeholders in judging without Outcome labels or hidden assignment data;
 - a protected feedback placeholder that does not reveal an image before actual-outcome confirmation;
 - disabled preview actions so layout review cannot be mistaken for implemented domain behavior;
-- three ViewModel tests covering ordering, the five-item limit, empty data, and safe read errors.
+- three ViewModel tests covering ordering, the five-item limit, empty data, and safe read errors;
+- a navigation ViewModel test covering all three Start destinations.
 
 Remaining Stage 1 work:
 
@@ -298,6 +302,20 @@ Remaining Stage 1 work:
 - connect buttons and form actions only when their domain operations are implemented;
 - decide which top-level destinations remain in the final Flyout or tab structure;
 - manually verify the start screen on Windows and Android devices at phone and tablet sizes.
+
+Functional gaps after layout review:
+
+- replace every preview data source with SQLite-backed repositories and queries;
+- implement New session save, validation, image-pair selection, protocol review, and atomic protocol lock;
+- add project details and resume actions from Dashboard, Projects, and History cards;
+- implement the real trial timer, notes autosave, drawing canvas, pause/resume, and suspension recovery;
+- load the two real judging images without Outcome labels and implement confidence capture and scoring;
+- implement actual-outcome confirmation, authoritative feedback-time validation, winner-image reveal, and persistence;
+- implement notification permissions, scheduling, cancellation, rescheduling, and safe notification opening;
+- calculate statistics from stored completed projects instead of preview values;
+- persist settings and connect them to themes, notifications, haptics, and feedback confirmation;
+- add loading, validation, retry, destructive-confirmation, and navigation error states to the operational flows;
+- perform manual accessibility and responsive-layout checks on Windows, Android phone, and tablet widths.
 
 Exit criteria:
 
@@ -637,6 +655,7 @@ Notification tests should include:
 - [x] Add the Home start page with an overview limited to five recent sessions.
 - [x] Add preview layouts and ViewModels for all planned Stage 1 feature pages.
 - [x] Add Shell navigation for reviewing all preview layouts.
+- [x] Add the Start hub with New session, History, and Dashboard navigation.
 - [ ] Configure EF Core SQLite beyond the current package references.
 - [x] Add the initial domain model foundation.
 - [ ] Complete the remaining domain model and protocol state machine.
@@ -652,7 +671,7 @@ Notification tests should include:
 - [ ] Add manual winner entry.
 - [ ] Add winner-image reveal UI and persistence; winner-image resolution in the domain is complete.
 - [ ] Add basic statistics.
-- [ ] Complete tests for all critical rules; 22 tests currently pass, including 19 domain tests and 3 Home ViewModel tests.
+- [ ] Complete tests for all critical rules; 23 tests currently pass, including 19 domain tests and 4 presentation/navigation ViewModel tests.
 
 ### Should have
 

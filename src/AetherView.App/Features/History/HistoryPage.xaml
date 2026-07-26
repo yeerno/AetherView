@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AetherView.App.Features.History.HistoryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:history="clr-namespace:AetherView.App.Features.History"
+    x:DataType="history:HistoryViewModel"
+    Title="Historia">
+
+    <CollectionView
+        ItemsSource="{Binding Sessions}"
+        SelectionMode="None">
+        <CollectionView.Header>
+            <VerticalStackLayout
+                Padding="24,24,24,18"
+                Spacing="14"
+                MaximumWidthRequest="920"
+                HorizontalOptions="Fill">
+                <Border Style="{StaticResource PreviewBadge}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10" />
+                    </Border.StrokeShape>
+                    <Label Style="{StaticResource PreviewBadgeLabel}" />
+                </Border>
+                <Label
+                    Text="Historia sesji"
+                    Style="{StaticResource FeaturePageTitle}"
+                    SemanticProperties.HeadingLevel="Level1" />
+                <Label
+                    Text="Zakończone projekty, faktyczne wyniki i zapisane decyzje predykcyjne."
+                    Style="{StaticResource FeaturePageSubtitle}" />
+            </VerticalStackLayout>
+        </CollectionView.Header>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="history:HistorySessionItemViewModel">
+                <Border
+                    Margin="24,0,24,12"
+                    MaximumWidthRequest="872"
+                    HorizontalOptions="Fill"
+                    Style="{StaticResource FeatureCard}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18" />
+                    </Border.StrokeShape>
+                    <Grid
+                        RowDefinitions="Auto,Auto"
+                        ColumnDefinitions="*,Auto"
+                        RowSpacing="8"
+                        ColumnSpacing="12">
+                        <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="3">
+                            <Label
+                                Text="{Binding Name}"
+                                Style="{StaticResource FeatureCardTitle}"
+                                SemanticProperties.HeadingLevel="Level2" />
+                            <Label Text="{Binding Date}" Style="{StaticResource FeatureMutedLabel}" />
+                        </VerticalStackLayout>
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Padding="9,4"
+                            BackgroundColor="{Binding ResultBackground}"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+                            <Label
+                                Text="{Binding Result}"
+                                FontAttributes="Bold"
+                                FontSize="11"
+                                TextColor="{Binding ResultForeground}" />
+                        </Border>
+                        <Grid
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            ColumnDefinitions="*,Auto">
+                            <Label
+                                Text="Faktyczny wynik"
+                                Style="{StaticResource FeatureMutedLabel}" />
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding ActualOutcome}"
+                                FontAttributes="Bold"
+                                FontSize="13" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+        <CollectionView.Footer>
+            <BoxView HeightRequest="24" Opacity="0" />
+        </CollectionView.Footer>
+    </CollectionView>
+</ContentPage>

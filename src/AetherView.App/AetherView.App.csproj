@@ -48,7 +48,7 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
-		<Compile Remove="App.xaml.cs;AppShell.xaml.cs;MauiProgram.cs;Features\**\*.xaml.cs;Platforms\**\*.cs" />
+		<Compile Remove="App.xaml.cs;AppShell.xaml.cs;MauiProgram.cs;Features\**\*.xaml.cs;Platforms\**\*.cs;Services\Navigation\ShellStartNavigationService.cs" />
 		<MauiXaml Remove="**\*.xaml" />
 	</ItemGroup>
 
@@ -84,5 +84,14 @@
 		<PackageReference Include="SQLitePCLRaw.lib.e_sqlite3.android" Version="2.1.12" />
 		<PackageReference Include="SQLitePCLRaw.lib.e_sqlite3.ios" Version="2.1.12" />
 	</ItemGroup>
+
+	<Target
+		Name="QuoteWindowsRunCommand"
+		BeforeTargets="Run"
+		Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and $([System.String]::Copy('$(RunCommand)').Contains(' '))">
+		<PropertyGroup>
+			<RunCommand>&quot;$(RunCommand)&quot;</RunCommand>
+		</PropertyGroup>
+	</Target>
 
 </Project>

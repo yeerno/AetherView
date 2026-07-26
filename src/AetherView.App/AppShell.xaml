@@ -22,11 +22,25 @@
         </Grid>
     </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="Start" Route="Home">
+    <FlyoutItem Title="Start" Route="Start">
+        <ShellContent
+            x:Name="StartContent"
+            Title="Start"
+            Route="StartPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Dashboard" Route="Dashboard">
         <ShellContent
             x:Name="HomeContent"
-            Title="Start"
+            Title="Dashboard"
             Route="HomePage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Historia" Route="History">
+        <ShellContent
+            x:Name="HistoryContent"
+            Title="Historia"
+            Route="HistoryPage" />
     </FlyoutItem>
 
     <FlyoutItem Title="Projekty" Route="Projects">

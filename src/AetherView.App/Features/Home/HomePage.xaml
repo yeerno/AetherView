@@ -5,8 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:home="clr-namespace:AetherView.App.Features.Home"
     x:DataType="home:HomeViewModel"
-    Shell.NavBarIsVisible="False"
-    Title="Start">
+    Title="Dashboard">
 
     <ContentPage.Resources>
         <Style x:Key="EyebrowLabelStyle" TargetType="Label">

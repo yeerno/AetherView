@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AetherView.App.Features.Start.StartPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:start="clr-namespace:AetherView.App.Features.Start"
+    x:DataType="start:StartViewModel"
+    Shell.NavBarIsVisible="False"
+    Title="Start">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24,34"
+            Spacing="24"
+            MaximumWidthRequest="820"
+            HorizontalOptions="Fill">
+            <VerticalStackLayout Spacing="7">
+                <Label Text="AETHER VIEW" Style="{StaticResource FeatureEyebrowLabel}" />
+                <Label
+                    Text="Rozpocznij świadomą sesję ARV"
+                    Style="{StaticResource FeaturePageTitle}"
+                    SemanticProperties.HeadingLevel="Level1" />
+                <Label
+                    Text="Nowa sesja, historia i dashboard są dostępne bezpośrednio z tego ekranu."
+                    Style="{StaticResource FeaturePageSubtitle}" />
+            </VerticalStackLayout>
+
+            <Border
+                Padding="24"
+                BackgroundColor="{AppThemeBinding Light=#E5F2EF, Dark=#15363B}"
+                Stroke="{AppThemeBinding Light=#C4DDD8, Dark=#2A555B}"
+                StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="16">
+                    <Border
+                        Padding="10,5"
+                        HorizontalOptions="Start"
+                        BackgroundColor="{AppThemeBinding Light=#D4EAE5, Dark=#285158}"
+                        StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="11" />
+                        </Border.StrokeShape>
+                        <Label
+                            Text="GŁÓWNA AKCJA"
+                            Style="{StaticResource FeatureEyebrowLabel}" />
+                    </Border>
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            Text="Utwórz nową sesję"
+                            FontAttributes="Bold"
+                            FontSize="26"
+                            TextColor="{AppThemeBinding Light=#123438, Dark=#F2FAF9}"
+                            SemanticProperties.HeadingLevel="Level2" />
+                        <Label
+                            Text="Zdefiniuj pytanie, Outcome A i Outcome B oraz czas feedbacku."
+                            Style="{StaticResource FeaturePageSubtitle}" />
+                    </VerticalStackLayout>
+                    <Button
+                        Text="Rozpocznij nową sesję"
+                        Command="{Binding CreateSessionCommand}"
+                        SemanticProperties.Hint="Przechodzi do formularza nowego projektu" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Border
+                    Grid.Column="0"
+                    Style="{StaticResource FeatureCard}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="12">
+                        <VerticalStackLayout Spacing="5">
+                            <Label
+                                Text="Historia"
+                                Style="{StaticResource FeatureCardTitle}"
+                                SemanticProperties.HeadingLevel="Level2" />
+                            <Label
+                                Text="Przegląd zakończonych sesji i ich wyników."
+                                Style="{StaticResource FeatureMutedLabel}" />
+                        </VerticalStackLayout>
+                        <Button
+                            Text="Otwórz historię"
+                            Command="{Binding OpenHistoryCommand}"
+                            Style="{StaticResource SecondaryActionButton}"
+                            SemanticProperties.Hint="Przechodzi do historii sesji" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Grid.Column="1"
+                    Style="{StaticResource FeatureCard}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="12">
+                        <VerticalStackLayout Spacing="5">
+                            <Label
+                                Text="Dashboard"
+                                Style="{StaticResource FeatureCardTitle}"
+                                SemanticProperties.HeadingLevel="Level2" />
+                            <Label
+                                Text="Ostatnie sesje i aktywne etapy workflow."
+                                Style="{StaticResource FeatureMutedLabel}" />
+                        </VerticalStackLayout>
+                        <Button
+                            Text="Otwórz dashboard"
+                            Command="{Binding OpenDashboardCommand}"
+                            Style="{StaticResource SecondaryActionButton}"
+                            SemanticProperties.Hint="Przechodzi do dashboardu" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Border Style="{StaticResource PreviewBadge}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Label Style="{StaticResource PreviewBadgeLabel}" />
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

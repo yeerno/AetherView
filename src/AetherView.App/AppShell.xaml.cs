@@ -1,9 +1,11 @@
 using AetherView.App.Features.Feedback;
+using AetherView.App.Features.History;
 using AetherView.App.Features.Home;
 using AetherView.App.Features.Judging;
 using AetherView.App.Features.Projects;
 using AetherView.App.Features.Session;
 using AetherView.App.Features.Settings;
+using AetherView.App.Features.Start;
 using AetherView.App.Features.Statistics;
 
 namespace AetherView.App;
@@ -11,7 +13,9 @@ namespace AetherView.App;
 public partial class AppShell : Shell
 {
     public AppShell(
+        StartPage startPage,
         HomePage homePage,
+        HistoryPage historyPage,
         ProjectsPage projectsPage,
         ProjectEditorPage projectEditorPage,
         SessionPage sessionPage,
@@ -20,7 +24,9 @@ public partial class AppShell : Shell
         StatisticsPage statisticsPage,
         SettingsPage settingsPage)
     {
+        ArgumentNullException.ThrowIfNull(startPage);
         ArgumentNullException.ThrowIfNull(homePage);
+        ArgumentNullException.ThrowIfNull(historyPage);
         ArgumentNullException.ThrowIfNull(projectsPage);
         ArgumentNullException.ThrowIfNull(projectEditorPage);
         ArgumentNullException.ThrowIfNull(sessionPage);
@@ -31,7 +37,9 @@ public partial class AppShell : Shell
 
         InitializeComponent();
 
+        StartContent.Content = startPage;
         HomeContent.Content = homePage;
+        HistoryContent.Content = historyPage;
         ProjectsContent.Content = projectsPage;
         ProjectEditorContent.Content = projectEditorPage;
         SessionContent.Content = sessionPage;
