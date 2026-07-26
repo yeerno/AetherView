@@ -48,7 +48,7 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
-		<Compile Remove="App.xaml.cs;AppShell.xaml.cs;MainPage.xaml.cs;MauiProgram.cs;Platforms\**\*.cs" />
+		<Compile Remove="App.xaml.cs;AppShell.xaml.cs;MauiProgram.cs;Features\**\*.xaml.cs;Platforms\**\*.cs" />
 		<MauiXaml Remove="**\*.xaml" />
 	</ItemGroup>
 

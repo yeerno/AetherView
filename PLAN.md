@@ -230,7 +230,7 @@ Last updated: 2026-07-26.
 | Stage | Status | Summary |
 | --- | --- | --- |
 | Stage 0 — Repository bootstrap | In progress | The solution, MAUI project, xUnit project, SDK pinning, documentation, restore, build, and test flow exist. Central package management is still missing, application startup has not been manually verified, and Android clean builds report two SQLite native-library warnings. |
-| Stage 1 — Application shell and navigation | Not started | Only the default MAUI template shell exists. Feature navigation, ViewModels, and application themes have not been implemented. |
+| Stage 1 — Application shell and navigation | In progress | All planned feature pages now have DI-resolved, theme-aware preview layouts with explicit dummy data and are available through Shell navigation. Contextual workflow navigation and real behavior remain to be implemented. |
 | Stage 2 — Domain model and protocol rules | In progress | The initial domain foundation, secure blind assignment, the main happy-path transitions, clock abstraction, feedback reveal rule, and 19 domain tests are implemented. The remaining Stage 2 work is listed below. |
 | Stages 3–10 | Not started | Persistence, project UI, image library, trials, judging, notifications, statistics, audio, and polish remain outside the current implementation. |
 
@@ -272,6 +272,32 @@ Deliverables:
   - Feedback;
   - Statistics;
   - Settings.
+
+Implemented foundation:
+
+- feature-oriented `Features/Home` folder with `HomePage`, `HomeViewModel`, and a presentation model for recent sessions;
+- `HomePage` configured as the application start screen;
+- preview layouts and ViewModels for Projects, Project editor, Session, Judging, Feedback, Statistics, and Settings;
+- constructor-based dependency injection for `App`, `AppShell`, all pages, and all ViewModels;
+- Flyout Shell navigation exposing every preview page;
+- a recent-project query interface with an explicit preview-data implementation until SQLite persistence is available;
+- sorting by project update time and a hard limit of five items in the ViewModel;
+- loading, pull-to-refresh, empty, and safe error states;
+- compiled bindings on pages and data templates;
+- shared feature styles plus responsive layouts with light and dark theme colors and semantic headings;
+- neutral numbered image placeholders in judging without Outcome labels or hidden assignment data;
+- a protected feedback placeholder that does not reveal an image before actual-outcome confirmation;
+- disabled preview actions so layout review cannot be mistaken for implemented domain behavior;
+- three ViewModel tests covering ordering, the five-item limit, empty data, and safe read errors.
+
+Remaining Stage 1 work:
+
+- replace preview records with repositories and persisted data after Stage 3;
+- replace direct preview-page menu access with contextual workflow navigation;
+- connect Home and Projects cards to project details;
+- connect buttons and form actions only when their domain operations are implemented;
+- decide which top-level destinations remain in the final Flyout or tab structure;
+- manually verify the start screen on Windows and Android devices at phone and tablet sizes.
 
 Exit criteria:
 
@@ -608,6 +634,9 @@ Notification tests should include:
 - [ ] Configure central package management.
 - [x] Configure MVVM Toolkit.
 - [x] Configure MAUI Community Toolkit.
+- [x] Add the Home start page with an overview limited to five recent sessions.
+- [x] Add preview layouts and ViewModels for all planned Stage 1 feature pages.
+- [x] Add Shell navigation for reviewing all preview layouts.
 - [ ] Configure EF Core SQLite beyond the current package references.
 - [x] Add the initial domain model foundation.
 - [ ] Complete the remaining domain model and protocol state machine.
@@ -623,7 +652,7 @@ Notification tests should include:
 - [ ] Add manual winner entry.
 - [ ] Add winner-image reveal UI and persistence; winner-image resolution in the domain is complete.
 - [ ] Add basic statistics.
-- [ ] Complete tests for all critical rules; 19 assignment, transition, timing, and reveal tests currently pass.
+- [ ] Complete tests for all critical rules; 22 tests currently pass, including 19 domain tests and 3 Home ViewModel tests.
 
 ### Should have
 

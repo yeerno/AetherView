@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AetherView.App.Features.Statistics.StatisticsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:statistics="clr-namespace:AetherView.App.Features.Statistics"
+    x:DataType="statistics:StatisticsViewModel"
+    Title="Statystyki">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24"
+            Spacing="18"
+            MaximumWidthRequest="900"
+            HorizontalOptions="Fill">
+            <Border Style="{StaticResource PreviewBadge}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Label Style="{StaticResource PreviewBadgeLabel}" />
+            </Border>
+            <Label
+                Text="Statystyki"
+                Style="{StaticResource FeaturePageTitle}"
+                SemanticProperties.HeadingLevel="Level1" />
+            <Label
+                Text="Opisowe podsumowanie ukończonych projektów. Dane nie stanowią naukowego potwierdzenia skuteczności."
+                Style="{StaticResource FeaturePageSubtitle}" />
+
+            <Border Style="{StaticResource FeatureSoftCard}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="22" />
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Wskaźnik trafień" Style="{StaticResource FeatureEyebrowLabel}" />
+                        <Label
+                            Text="{Binding HitRate}"
+                            FontAttributes="Bold"
+                            FontSize="38"
+                            TextColor="{AppThemeBinding Light=#285D59, Dark=#A6D4D0}" />
+                        <Label
+                            Text="Trafienia spośród projektów z prognozą"
+                            Style="{StaticResource FeatureMutedLabel}" />
+                    </VerticalStackLayout>
+                    <ProgressBar
+                        Grid.Column="1"
+                        WidthRequest="120"
+                        Progress="0.636"
+                        Rotation="-90"
+                        VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <FlexLayout
+                Direction="Row"
+                Wrap="Wrap"
+                JustifyContent="SpaceBetween"
+                AlignItems="Stretch"
+                BindableLayout.ItemsSource="{Binding Metrics}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="statistics:StatisticMetricViewModel">
+                        <Border
+                            Margin="0,0,10,10"
+                            Padding="16"
+                            MinimumWidthRequest="145"
+                            Style="{StaticResource FeatureCard}"
+                            FlexLayout.Grow="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="16" />
+                            </Border.StrokeShape>
+                            <VerticalStackLayout Spacing="3">
+                                <Label
+                                    Text="{Binding Value}"
+                                    FontAttributes="Bold"
+                                    FontSize="26" />
+                                <Label
+                                    Text="{Binding Label}"
+                                    Style="{StaticResource FeatureMutedLabel}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+
+            <Label
+                Text="Ostatnie wyniki"
+                Style="{StaticResource FeatureSectionTitle}"
+                SemanticProperties.HeadingLevel="Level2" />
+            <VerticalStackLayout
+                Spacing="10"
+                BindableLayout.ItemsSource="{Binding RecentResults}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="statistics:RecentResultViewModel">
+                        <Border Style="{StaticResource FeatureCard}">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="16" />
+                            </Border.StrokeShape>
+                            <Grid
+                                RowDefinitions="Auto,Auto"
+                                ColumnDefinitions="*,Auto"
+                                RowSpacing="4">
+                                <Label
+                                    Text="{Binding Name}"
+                                    Style="{StaticResource FeatureCardTitle}" />
+                                <Label
+                                    Grid.Column="1"
+                                    Text="{Binding Result}"
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    TextColor="{AppThemeBinding Light=#3C6F74, Dark=#8FC5C4}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Text="{Binding Date}"
+                                    Style="{StaticResource FeatureMutedLabel}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+            <BoxView HeightRequest="12" Opacity="0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

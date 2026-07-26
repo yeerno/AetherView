@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AetherView.App.Features.Settings.SettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:settings="clr-namespace:AetherView.App.Features.Settings"
+    x:DataType="settings:SettingsViewModel"
+    Title="Ustawienia">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24"
+            Spacing="18"
+            MaximumWidthRequest="760"
+            HorizontalOptions="Fill">
+            <Border Style="{StaticResource PreviewBadge}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Label Style="{StaticResource PreviewBadgeLabel}" />
+            </Border>
+            <Label
+                Text="Ustawienia"
+                Style="{StaticResource FeaturePageTitle}"
+                SemanticProperties.HeadingLevel="Level1" />
+            <Label
+                Text="Dostosuj zachowanie aplikacji i sposób prowadzenia sesji."
+                Style="{StaticResource FeaturePageSubtitle}" />
+
+            <Border Style="{StaticResource FeatureCard}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="16">
+                    <Label
+                        Text="Wygląd"
+                        Style="{StaticResource FeatureSectionTitle}"
+                        SemanticProperties.HeadingLevel="Level2" />
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="Motyw aplikacji" Style="{StaticResource FeatureCardTitle}" />
+                            <Label
+                                Text="Jasny, ciemny lub zgodny z systemem"
+                                Style="{StaticResource FeatureMutedLabel}" />
+                        </VerticalStackLayout>
+                        <Label
+                            Grid.Column="1"
+                            Text="{Binding ThemeName}"
+                            VerticalOptions="Center"
+                            FontAttributes="Bold"
+                            TextColor="{AppThemeBinding Light=#3C6F74, Dark=#8FC5C4}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource FeatureCard}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="18">
+                    <Label
+                        Text="Sesje i feedback"
+                        Style="{StaticResource FeatureSectionTitle}"
+                        SemanticProperties.HeadingLevel="Level2" />
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="Powiadomienia" Style="{StaticResource FeatureCardTitle}" />
+                            <Label
+                                Text="Przypomnienie, gdy feedback jest dostępny"
+                                Style="{StaticResource FeatureMutedLabel}" />
+                        </VerticalStackLayout>
+                        <Switch
+                            Grid.Column="1"
+                            IsToggled="{Binding NotificationsEnabled}"
+                            SemanticProperties.Description="Powiadomienia o feedbacku" />
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="{AppThemeBinding Light=#E4EBE9, Dark=#344447}" />
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="Wibracje" Style="{StaticResource FeatureCardTitle}" />
+                            <Label
+                                Text="Delikatne potwierdzenia ważnych akcji"
+                                Style="{StaticResource FeatureMutedLabel}" />
+                        </VerticalStackLayout>
+                        <Switch
+                            Grid.Column="1"
+                            IsToggled="{Binding HapticsEnabled}"
+                            SemanticProperties.Description="Wibracje interfejsu" />
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="{AppThemeBinding Light=#E4EBE9, Dark=#344447}" />
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="2">
+                            <Label
+                                Text="Potwierdzenie przed ujawnieniem"
+                                Style="{StaticResource FeatureCardTitle}" />
+                            <Label
+                                Text="Chroni przed przypadkowym feedbackiem"
+                                Style="{StaticResource FeatureMutedLabel}" />
+                        </VerticalStackLayout>
+                        <Switch
+                            Grid.Column="1"
+                            IsToggled="{Binding ConfirmBeforeReveal}"
+                            SemanticProperties.Description="Potwierdzenie przed ujawnieniem feedbacku" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource FeatureSoftCard}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="10">
+                    <Label
+                        Text="Wersje protokołu"
+                        Style="{StaticResource FeatureSectionTitle}"
+                        SemanticProperties.HeadingLevel="Level2" />
+                    <Grid
+                        RowDefinitions="Auto,Auto"
+                        ColumnDefinitions="*,Auto"
+                        RowSpacing="8">
+                        <Label Text="Protokół" Style="{StaticResource FeatureMutedLabel}" />
+                        <Label Grid.Column="1" Text="{Binding ProtocolVersion}" FontAttributes="Bold" />
+                        <Label Grid.Row="1" Text="Scoring" Style="{StaticResource FeatureMutedLabel}" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding ScoringVersion}"
+                            FontAttributes="Bold" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+            <BoxView HeightRequest="12" Opacity="0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

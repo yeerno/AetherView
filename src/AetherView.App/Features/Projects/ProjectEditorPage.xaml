@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AetherView.App.Features.Projects.ProjectEditorPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:projects="clr-namespace:AetherView.App.Features.Projects"
+    x:DataType="projects:ProjectEditorViewModel"
+    Title="Edytor projektu">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24"
+            Spacing="18"
+            MaximumWidthRequest="760"
+            HorizontalOptions="Fill">
+            <Border Style="{StaticResource PreviewBadge}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Label Style="{StaticResource PreviewBadgeLabel}" />
+            </Border>
+            <Label
+                Text="Nowy projekt"
+                Style="{StaticResource FeaturePageTitle}"
+                SemanticProperties.HeadingLevel="Level1" />
+            <Label
+                Text="Zdefiniuj pytanie, dwa rozłączne wyniki i harmonogram feedbacku."
+                Style="{StaticResource FeaturePageSubtitle}" />
+
+            <Border Style="{StaticResource FeatureCard}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="14">
+                    <Label
+                        Text="Podstawowe informacje"
+                        Style="{StaticResource FeatureSectionTitle}"
+                        SemanticProperties.HeadingLevel="Level2" />
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Nazwa projektu" Style="{StaticResource FeatureMutedLabel}" />
+                        <Entry
+                            Text="{Binding Name}"
+                            Placeholder="Np. Finał turnieju"
+                            SemanticProperties.Description="Nazwa projektu" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Pytanie binarne" Style="{StaticResource FeatureMutedLabel}" />
+                        <Editor
+                            Text="{Binding Question}"
+                            Placeholder="Jakie zdarzenie chcesz przewidzieć?"
+                            AutoSize="TextChanges"
+                            MinimumHeightRequest="92"
+                            SemanticProperties.Description="Pytanie projektu" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource FeatureCard}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="14">
+                    <Label
+                        Text="Możliwe wyniki"
+                        Style="{StaticResource FeatureSectionTitle}"
+                        SemanticProperties.HeadingLevel="Level2" />
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Outcome A" Style="{StaticResource FeatureMutedLabel}" />
+                        <Entry
+                            Text="{Binding OutcomeAName}"
+                            SemanticProperties.Description="Nazwa wyniku A" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Outcome B" Style="{StaticResource FeatureMutedLabel}" />
+                        <Entry
+                            Text="{Binding OutcomeBName}"
+                            SemanticProperties.Description="Nazwa wyniku B" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource FeatureCard}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="14">
+                    <Label
+                        Text="Harmonogram"
+                        Style="{StaticResource FeatureSectionTitle}"
+                        SemanticProperties.HeadingLevel="Level2" />
+                    <Grid
+                        RowDefinitions="Auto,Auto"
+                        ColumnDefinitions="*,Auto"
+                        RowSpacing="12">
+                        <Label Text="Początek wydarzenia" Style="{StaticResource FeatureMutedLabel}" />
+                        <Label
+                            Grid.Column="1"
+                            Text="{Binding EventStartsAtDisplay}"
+                            FontAttributes="Bold" />
+                        <Label
+                            Grid.Row="1"
+                            Text="Dostępność feedbacku"
+                            Style="{StaticResource FeatureMutedLabel}" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding FeedbackAvailableAtDisplay}"
+                            FontAttributes="Bold" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label
+                            Text="Liczba prób"
+                            VerticalOptions="Center"
+                            Style="{StaticResource FeatureMutedLabel}" />
+                        <Stepper
+                            Grid.Column="1"
+                            Minimum="1"
+                            Maximum="30"
+                            Increment="1"
+                            Value="{Binding PlannedTrialCount}" />
+                    </Grid>
+                    <Label
+                        Text="{Binding PlannedTrialCount, StringFormat='Zaplanowano: {0} prób'}"
+                        HorizontalTextAlignment="End"
+                        Style="{StaticResource FeatureMutedLabel}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button
+                Text="Zapisz i przejrzyj protokół"
+                IsEnabled="False"
+                SemanticProperties.Hint="Akcja zostanie podłączona do zapisu projektu" />
+            <BoxView HeightRequest="12" Opacity="0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

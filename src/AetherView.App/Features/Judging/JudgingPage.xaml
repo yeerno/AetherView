@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AetherView.App.Features.Judging.JudgingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:judging="clr-namespace:AetherView.App.Features.Judging"
+    x:DataType="judging:JudgingViewModel"
+    Title="Self-judging">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24"
+            Spacing="18"
+            MaximumWidthRequest="900"
+            HorizontalOptions="Fill">
+            <Border Style="{StaticResource PreviewBadge}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Label Style="{StaticResource PreviewBadgeLabel}" />
+            </Border>
+            <Label Text="{Binding ProjectName}" Style="{StaticResource FeatureEyebrowLabel}" />
+            <Label
+                Text="Self-judging"
+                Style="{StaticResource FeaturePageTitle}"
+                SemanticProperties.HeadingLevel="Level1" />
+            <Label
+                Text="{Binding TrialCounter}"
+                Style="{StaticResource FeaturePageSubtitle}" />
+
+            <Border Style="{StaticResource FeatureSoftCard}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <Label
+                    Text="Porównaj notatki i szkic z oboma obrazami. Obrazy nie mają etykiet Outcome i nie ujawniają ukrytego przypisania."
+                    Style="{StaticResource FeaturePageSubtitle}" />
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Border
+                    Grid.Column="0"
+                    Padding="10"
+                    Stroke="{AppThemeBinding Light=#3C7775, Dark=#8FC5C4}"
+                    StrokeThickness="3"
+                    BackgroundColor="{AppThemeBinding Light=#E8F4F2, Dark=#1C3A3F}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="10">
+                        <Border
+                            HeightRequest="210"
+                            BackgroundColor="{AppThemeBinding Light=#C9DAD7, Dark=#365055}"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+                            <Grid>
+                                <Label
+                                    Text="01"
+                                    FontAttributes="Bold"
+                                    FontSize="44"
+                                    Opacity="0.35"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    SemanticProperties.Description="Neutralny podgląd obrazu numer jeden" />
+                            </Grid>
+                        </Border>
+                        <RadioButton
+                            Content="Wybieram obraz 01"
+                            IsChecked="{Binding FirstImageSelected}"
+                            GroupName="JudgementImage" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Grid.Column="1"
+                    Padding="10"
+                    Style="{StaticResource FeatureCard}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="10">
+                        <Border
+                            HeightRequest="210"
+                            BackgroundColor="{AppThemeBinding Light=#DAD5C9, Dark=#514B3E}"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+                            <Grid>
+                                <Label
+                                    Text="02"
+                                    FontAttributes="Bold"
+                                    FontSize="44"
+                                    Opacity="0.35"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    SemanticProperties.Description="Neutralny podgląd obrazu numer dwa" />
+                            </Grid>
+                        </Border>
+                        <RadioButton
+                            Content="Wybieram obraz 02"
+                            IsChecked="{Binding SecondImageSelected}"
+                            GroupName="JudgementImage" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Border Style="{StaticResource FeatureCard}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label
+                            Text="Pewność dopasowania"
+                            Style="{StaticResource FeatureSectionTitle}" />
+                        <Label
+                            Grid.Column="1"
+                            Text="{Binding ConfidenceDisplay}"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            TextColor="{AppThemeBinding Light=#3C6F74, Dark=#8FC5C4}" />
+                    </Grid>
+                    <Slider
+                        Minimum="0.1"
+                        Maximum="4"
+                        Value="{Binding Confidence}" />
+                    <Grid ColumnDefinitions="*,*">
+                        <Label Text="0.1 · słaby sygnał" Style="{StaticResource FeatureMutedLabel}" />
+                        <Label
+                            Grid.Column="1"
+                            Text="4.0 · silny sygnał"
+                            HorizontalTextAlignment="End"
+                            Style="{StaticResource FeatureMutedLabel}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Button
+                Text="Zapisz ocenę próby"
+                IsEnabled="False"
+                SemanticProperties.Hint="Akcja zostanie podłączona w Stage 7" />
+            <BoxView HeightRequest="12" Opacity="0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

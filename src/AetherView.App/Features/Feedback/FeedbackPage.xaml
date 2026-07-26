@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AetherView.App.Features.Feedback.FeedbackPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:feedback="clr-namespace:AetherView.App.Features.Feedback"
+    x:DataType="feedback:FeedbackViewModel"
+    Title="Feedback">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24"
+            Spacing="18"
+            MaximumWidthRequest="760"
+            HorizontalOptions="Fill">
+            <Border Style="{StaticResource PreviewBadge}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Label Style="{StaticResource PreviewBadgeLabel}" />
+            </Border>
+            <Label Text="{Binding ProjectName}" Style="{StaticResource FeatureEyebrowLabel}" />
+            <Label
+                Text="Feedback"
+                Style="{StaticResource FeaturePageTitle}"
+                SemanticProperties.HeadingLevel="Level1" />
+            <Label Text="{Binding Question}" Style="{StaticResource FeaturePageSubtitle}" />
+
+            <Border Style="{StaticResource FeatureSoftCard}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <Grid
+                    ColumnDefinitions="Auto,*"
+                    ColumnSpacing="14">
+                    <Border
+                        WidthRequest="44"
+                        HeightRequest="44"
+                        Padding="0"
+                        BackgroundColor="{AppThemeBinding Light=#D7EDE8, Dark=#285158}"
+                        StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="22" />
+                        </Border.StrokeShape>
+                        <Label
+                            Text="✓"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            TextColor="{AppThemeBinding Light=#285D59, Dark=#B9E0DC}" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="3">
+                        <Label
+                            Text="Feedback jest dostępny"
+                            Style="{StaticResource FeatureCardTitle}" />
+                        <Label
+                            Text="{Binding FeedbackAvailableAt}"
+                            Style="{StaticResource FeatureMutedLabel}" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <VerticalStackLayout Spacing="10">
+                <Label
+                    Text="Potwierdź faktyczny wynik"
+                    Style="{StaticResource FeatureSectionTitle}"
+                    SemanticProperties.HeadingLevel="Level2" />
+                <Label
+                    Text="Wybór zwycięzcy jest nieodwracalny i dopiero wtedy pozwala rozwiązać obraz feedbacku."
+                    Style="{StaticResource FeaturePageSubtitle}" />
+                <Border Style="{StaticResource FeatureCard}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18" />
+                    </Border.StrokeShape>
+                    <RadioButton
+                        Content="{Binding OutcomeAName, StringFormat='Outcome A · {0}'}"
+                        GroupName="ActualOutcome" />
+                </Border>
+                <Border Style="{StaticResource FeatureCard}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18" />
+                    </Border.StrokeShape>
+                    <RadioButton
+                        Content="{Binding OutcomeBName, StringFormat='Outcome B · {0}'}"
+                        GroupName="ActualOutcome" />
+                </Border>
+            </VerticalStackLayout>
+
+            <Border Style="{StaticResource FeatureCard}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="8">
+                    <Label
+                        Text="Obraz feedbacku"
+                        Style="{StaticResource FeatureSectionTitle}"
+                        HorizontalTextAlignment="Center" />
+                    <Border
+                        HeightRequest="280"
+                        BackgroundColor="{AppThemeBinding Light=#EFF3F2, Dark=#293638}"
+                        Stroke="{AppThemeBinding Light=#CDDAD8, Dark=#415255}"
+                        StrokeDashArray="5,4">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="14" />
+                        </Border.StrokeShape>
+                        <VerticalStackLayout
+                            Padding="20"
+                            Spacing="7"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                            <Label
+                                Text="Obraz pozostaje ukryty"
+                                Style="{StaticResource FeatureCardTitle}"
+                                HorizontalTextAlignment="Center" />
+                            <Label
+                                Text="Pojawi się tutaj dopiero po poprawnym potwierdzeniu zwycięzcy."
+                                Style="{StaticResource FeatureMutedLabel}"
+                                HorizontalTextAlignment="Center"
+                                MaximumWidthRequest="380" />
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+
+            <Button
+                Text="Potwierdź wynik i pokaż feedback"
+                IsEnabled="False"
+                SemanticProperties.Hint="Przycisk pozostaje wyłączony w demonstracyjnym układzie" />
+            <BoxView HeightRequest="12" Opacity="0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style x:Key="FeatureEyebrowLabel" TargetType="Label">
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="CharacterSpacing" Value="1.3" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#3C6F74, Dark=#8FC5C4}" />
+    </Style>
+
+    <Style x:Key="FeaturePageTitle" TargetType="Label">
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#102F34, Dark=#F4FBFA}" />
+    </Style>
+
+    <Style x:Key="FeaturePageSubtitle" TargetType="Label">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="LineHeight" Value="1.25" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#526B6E, Dark=#B8C9C7}" />
+    </Style>
+
+    <Style x:Key="FeatureSectionTitle" TargetType="Label">
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#183438, Dark=#F2FAF9}" />
+    </Style>
+
+    <Style x:Key="FeatureCardTitle" TargetType="Label">
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#183438, Dark=#F2FAF9}" />
+    </Style>
+
+    <Style x:Key="FeatureMutedLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#647A7C, Dark=#A9BEBC}" />
+    </Style>
+
+    <Style x:Key="FeatureCard" TargetType="Border">
+        <Setter Property="Padding" Value="18" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#FFFFFF, Dark=#202B2D}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light=#DCE6E4, Dark=#36484B}" />
+        <Setter Property="StrokeThickness" Value="1" />
+    </Style>
+
+    <Style x:Key="FeatureSoftCard" TargetType="Border">
+        <Setter Property="Padding" Value="18" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#F1F7F5, Dark=#1B3539}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light=#D2E5E1, Dark=#31545A}" />
+        <Setter Property="StrokeThickness" Value="1" />
+    </Style>
+
+    <Style x:Key="PreviewBadge" TargetType="Border">
+        <Setter Property="Padding" Value="9,4" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#FFF3D9, Dark=#4E3D20}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light=#ECD498, Dark=#775F31}" />
+        <Setter Property="StrokeThickness" Value="1" />
+    </Style>
+
+    <Style x:Key="PreviewBadgeLabel" TargetType="Label">
+        <Setter Property="Text" Value="DANE DEMONSTRACYJNE" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="CharacterSpacing" Value="1" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#775719, Dark=#F5D993}" />
+    </Style>
+
+    <Style x:Key="SecondaryActionButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#EAF2F0, Dark=#263A3D}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=#234F54, Dark=#C7DDDA}" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light=#CADDD9, Dark=#3C575B}" />
+        <Setter Property="BorderWidth" Value="1" />
+    </Style>
+
+</ResourceDictionary>

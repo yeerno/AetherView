@@ -3,12 +3,70 @@
     x:Class="AetherView.App.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:AetherView.App"
-    Title="AetherView.App">
+    FlyoutBehavior="Flyout"
+    Title="Aether View">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <Shell.FlyoutHeader>
+        <Grid
+            Padding="24,30,24,20"
+            BackgroundColor="{AppThemeBinding Light=#E8F4F2, Dark=#15363B}">
+            <VerticalStackLayout Spacing="3">
+                <Label
+                    Text="AETHER VIEW"
+                    Style="{StaticResource FeatureEyebrowLabel}" />
+                <Label
+                    Text="Offline ARV workspace"
+                    FontAttributes="Bold"
+                    FontSize="18" />
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Start" Route="Home">
+        <ShellContent
+            x:Name="HomeContent"
+            Title="Start"
+            Route="HomePage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Projekty" Route="Projects">
+        <ShellContent
+            x:Name="ProjectsContent"
+            Title="Projekty"
+            Route="ProjectsPage" />
+        <ShellContent
+            x:Name="ProjectEditorContent"
+            Title="Edytor projektu"
+            Route="ProjectEditorPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Workflow" Route="Workflow">
+        <ShellContent
+            x:Name="SessionContent"
+            Title="Sesja"
+            Route="SessionPage" />
+        <ShellContent
+            x:Name="JudgingContent"
+            Title="Self-judging"
+            Route="JudgingPage" />
+        <ShellContent
+            x:Name="FeedbackContent"
+            Title="Feedback"
+            Route="FeedbackPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Wyniki" Route="Results">
+        <ShellContent
+            x:Name="StatisticsContent"
+            Title="Statystyki"
+            Route="StatisticsPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Ustawienia" Route="Settings">
+        <ShellContent
+            x:Name="SettingsContent"
+            Title="Ustawienia"
+            Route="SettingsPage" />
+    </FlyoutItem>
 
 </Shell>

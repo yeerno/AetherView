@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AetherView.App.Features.Projects.ProjectsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:projects="clr-namespace:AetherView.App.Features.Projects"
+    x:DataType="projects:ProjectsViewModel"
+    Title="Projekty">
+
+    <CollectionView
+        ItemsSource="{Binding Projects}"
+        SelectionMode="None">
+        <CollectionView.Header>
+            <VerticalStackLayout
+                Padding="24,24,24,18"
+                Spacing="14"
+                MaximumWidthRequest="920"
+                HorizontalOptions="Fill">
+                <Border Style="{StaticResource PreviewBadge}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10" />
+                    </Border.StrokeShape>
+                    <Label Style="{StaticResource PreviewBadgeLabel}" />
+                </Border>
+                <Label
+                    Text="Twoje projekty"
+                    Style="{StaticResource FeaturePageTitle}"
+                    SemanticProperties.HeadingLevel="Level1" />
+                <Label
+                    Text="Kontynuuj aktywną sesję albo przygotuj nowy protokół."
+                    Style="{StaticResource FeaturePageSubtitle}" />
+                <Button
+                    Text="+ Nowy projekt"
+                    IsEnabled="False"
+                    SemanticProperties.Hint="Akcja zostanie podłączona w etapie tworzenia projektu" />
+            </VerticalStackLayout>
+        </CollectionView.Header>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="projects:ProjectListItemViewModel">
+                <Border
+                    Margin="24,0,24,12"
+                    MaximumWidthRequest="872"
+                    HorizontalOptions="Fill"
+                    Style="{StaticResource FeatureCard}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18" />
+                    </Border.StrokeShape>
+                    <Grid
+                        RowDefinitions="Auto,Auto,Auto"
+                        ColumnDefinitions="*,Auto"
+                        RowSpacing="9"
+                        ColumnSpacing="12">
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="{Binding Name}"
+                            Style="{StaticResource FeatureCardTitle}"
+                            LineBreakMode="TailTruncation"
+                            SemanticProperties.HeadingLevel="Level2" />
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Padding="9,4"
+                            BackgroundColor="{Binding StatusBackground}"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+                            <Label
+                                Text="{Binding Status}"
+                                FontAttributes="Bold"
+                                FontSize="11"
+                                TextColor="{Binding StatusForeground}" />
+                        </Border>
+                        <Label
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            Text="{Binding EventTime}"
+                            Style="{StaticResource FeatureMutedLabel}" />
+                        <Grid
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            ColumnDefinitions="*,Auto">
+                            <Label
+                                Text="Postęp sesji"
+                                Style="{StaticResource FeatureMutedLabel}" />
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding TrialProgress}"
+                                FontAttributes="Bold"
+                                FontSize="13" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+        <CollectionView.Footer>
+            <BoxView HeightRequest="24" Opacity="0" />
+        </CollectionView.Footer>
+    </CollectionView>
+</ContentPage>

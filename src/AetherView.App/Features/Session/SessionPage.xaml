@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AetherView.App.Features.Session.SessionPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:session="clr-namespace:AetherView.App.Features.Session"
+    x:DataType="session:SessionViewModel"
+    Title="Sesja">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24"
+            Spacing="18"
+            MaximumWidthRequest="820"
+            HorizontalOptions="Fill">
+            <Border Style="{StaticResource PreviewBadge}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Label Style="{StaticResource PreviewBadgeLabel}" />
+            </Border>
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <VerticalStackLayout Grid.Column="0" Spacing="3">
+                    <Label
+                        Text="{Binding ProjectName}"
+                        Style="{StaticResource FeatureEyebrowLabel}" />
+                    <Label
+                        Text="Sesja ARV"
+                        Style="{StaticResource FeaturePageTitle}"
+                        SemanticProperties.HeadingLevel="Level1" />
+                </VerticalStackLayout>
+                <Border
+                    Grid.Column="1"
+                    Padding="12,8"
+                    VerticalOptions="Center"
+                    Style="{StaticResource FeatureSoftCard}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="1">
+                        <Label
+                            Text="{Binding ElapsedTime}"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            HorizontalTextAlignment="Center" />
+                        <Label
+                            Text="CZAS"
+                            Style="{StaticResource FeatureEyebrowLabel}"
+                            HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Border Style="{StaticResource FeatureCard}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label
+                            Text="{Binding TrialCounter}"
+                            Style="{StaticResource FeatureCardTitle}" />
+                        <Label
+                            Grid.Column="1"
+                            Text="W toku"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            TextColor="{AppThemeBinding Light=#3C6F74, Dark=#8FC5C4}" />
+                    </Grid>
+                    <ProgressBar Progress="{Binding Progress}" />
+                    <Label
+                        Text="Skup się na wrażeniach sensorycznych. Nie próbuj nazywać ani interpretować celu."
+                        Style="{StaticResource FeatureMutedLabel}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <VerticalStackLayout Spacing="8">
+                <Label
+                    Text="Notatki percepcyjne"
+                    Style="{StaticResource FeatureSectionTitle}"
+                    SemanticProperties.HeadingLevel="Level2" />
+                <Border Style="{StaticResource FeatureCard}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18" />
+                    </Border.StrokeShape>
+                    <Editor
+                        Text="{Binding Notes}"
+                        AutoSize="TextChanges"
+                        MinimumHeightRequest="150"
+                        Placeholder="Zapisuj kształty, tekstury, temperaturę, ruch i dźwięki…"
+                        SemanticProperties.Description="Notatki z próby" />
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="8">
+                <Label
+                    Text="Szkic"
+                    Style="{StaticResource FeatureSectionTitle}"
+                    SemanticProperties.HeadingLevel="Level2" />
+                <Border
+                    HeightRequest="250"
+                    Style="{StaticResource FeatureSoftCard}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18" />
+                    </Border.StrokeShape>
+                    <Grid>
+                        <BoxView
+                            Color="{AppThemeBinding Light=#D9E7E4, Dark=#365156}"
+                            HeightRequest="1"
+                            VerticalOptions="Center" />
+                        <BoxView
+                            Color="{AppThemeBinding Light=#D9E7E4, Dark=#365156}"
+                            WidthRequest="1"
+                            HorizontalOptions="Center" />
+                        <VerticalStackLayout
+                            Spacing="5"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                            <Label
+                                Text="Obszar szkicu"
+                                Style="{StaticResource FeatureCardTitle}"
+                                HorizontalTextAlignment="Center" />
+                            <Label
+                                Text="Canvas zostanie dodany w Stage 6"
+                                Style="{StaticResource FeatureMutedLabel}"
+                                HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Button
+                    Text="Wstrzymaj"
+                    IsEnabled="False"
+                    Style="{StaticResource SecondaryActionButton}" />
+                <Button
+                    Grid.Column="1"
+                    Text="Zakończ próbę"
+                    IsEnabled="False" />
+            </Grid>
+            <BoxView HeightRequest="12" Opacity="0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
